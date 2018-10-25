@@ -1,0 +1,39 @@
+Alice 1.4 ("Kraftwerk 'Equaliser' Album") mastered 2007/04/24
+### loaded signature from x-alice:/lib/system/Print
+### loaded signature from x-alice:/lib/tools/Inspector
+### loaded signature from x-alice:/lib/distribution/Remote
+> fun writePoem(filename) =
+    let val file = TextIO.openOut(filename)
+        val _ = TextIO.output(file, "abacate\nabacaxe\ntexto\noxigenio\nabobora\ntatu\nhe\npc\ncamisa\ncamiseta\nadoravel\nafavel")
+    in TextIO.closeOut(file)
+    end;
+val writePoem : string -> unit = _fn
+> val _ = writePoem("palavras.txt");
+> fun readPoem(filename) =
+    let val file = TextIO.openIn filename
+        val poem = TextIO.inputAll file
+        val _ = TextIO.closeIn file
+    in String.tokens (fn c => c = #"\n") poem
+    end;
+val readPoem : string -> string list = _fn
+> val test_poem = readPoem "palavras.txt";
+val test_poem : string list =
+   ["abacate", "abacaxe", "texto", "oxigenio", "abobora", "tatu", "he", "pc",
+    "camisa", "camiseta", "adoravel", "afavel"]
+> fun writeFrag(filename) =
+    let val file = TextIO.openOut(filename)
+        val _ = TextIO.output(file, "a\nc\nhg\nh\nrf\nh\nhe\nli\nbe\nn\no\nf\nne\nna\nmg\nal\nsi\np\ns\ncl\nar\nk\nca\nsc\nti\nv\ncr\nmn\nfe\nco\nni\ncu\nzn\nga\nge\nas\nse\nbr\nkr\nrb\nsr\ny\nzr\nnb\nmo\ntc\nru\nrh\npd\nag\ncd\nin\nsn\nsb\nte\ni\nxe\ncs\nba\nhf\nta\nw\nre\nos\nir\npt\nau\nhg\ntl\npb\nbi\npo\nat\nrn\nfr\nra\nrf\ndb\nsg\nbh\nhs\nmt\nds\nrg\ncn\nfl\nlv\nla\nce\npr\nnd\npm\nsm\neu\ngd\ntb\ndy\nho\ner\ntm\nyb\nlu\nac\nth\npa\nu\nnp\npu\nam\ncm\nbk\ncf\nes\nfm\nmd\nno\nlr\n")
+    in TextIO.closeOut(file)
+    end;
+val writeFrag : string -> unit = _fn
+> val _ = writeFrag("fragmentos.txt")
+  ;
+> val test_poem = readPoem "palavras.txt";
+val test_poem : string list =
+   ["abacate", "abacaxe", "texto", "oxigenio", "abobora", "tatu", "he", "pc",
+    "camisa", "camiseta", "adoravel", "afavel"]
+> val test_poem = readPoem "fragmentos.txt";
+val test_poem : string list =
+   ["a", "c", "hg", "h", "rf", "h", "he", "li", "be", "n", "o", "f", "ne", "na",
+    "mg", "al", "si", "p", "s", "cl", "ar", "k", "ca", "sc", "ti", "v", "cr",
+    "mn", "fe", "co", "ni", "cu", ...]
