@@ -35,14 +35,12 @@ def percorre_fragmentos(palavra, idx=0):
     if not palavra:
         return True
 
-    # Verifica se a quantidade de caracteres de palavra eh maior que a de fragmento
-    elif len(palavra) >= len(fragmento):
+    # Verifica se a palavra, do inicio ate o tamanho do fragmento, eh igual ao fragmento
+    elif palavra[:len(fragmento)] == fragmento:
 
-        # Verifica se a palavra (do inicio ate o tamanho do fragmento) eh igual ao fragmento
-        if palavra[:len(fragmento)] == fragmento:
-            # Guarda estado da recursao. Caso a primeira descida nao tenha sido sucesso, ela volta
-            # pra onde deu certo e tenta de novo
-            bla = percorre_fragmentos(palavra[len(fragmento):], 0)
+        # Guarda estado da recursao. Caso a primeira descida nao tenha sido sucesso, ela volta
+        # pra onde deu certo e tenta de novo
+        bla = percorre_fragmentos(palavra[len(fragmento):], 0)
 
     return bla or percorre_fragmentos(palavra, idx + 1)
 
