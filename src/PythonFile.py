@@ -1,7 +1,9 @@
 import re
+import sys
+from functools import reduce
 
-fragmentos = re.sub('[^a-zA-Z \n]+', '', open("fragmentos").read()).split('\n')
-palavras = re.sub('[^a-zA-Z \n]+', '', open("palavras").read()).split('\n')
+# Define o tamanho máximo da pilha de recursão
+sys.setrecursionlimit(10000)
 
 # Cria uma lista de fragmentos unicos sem acentos e caracteres especiais
 fragmentos = list(set(re.sub('[^a-zA-Z \n]+', '', open("../arquivos/fragmentos")
