@@ -22,8 +22,8 @@ from functools import reduce
 # print(lista)
 
 
-saida1 = open('../arquivos/saida_teste1', 'r').read().split('\n')
-saida2 = open('../arquivos/saida_teste2', 'r').read().split('\n')
+saida1 = open('../src/testes/saida_teste1', 'r').read().split('\n')
+saida2 = open('../src/testes/saida_teste2', 'r').read().split('\n')
 
 saida1.sort()
 saida2.sort()

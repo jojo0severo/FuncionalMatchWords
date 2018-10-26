@@ -6,12 +6,12 @@ from functools import reduce
 sys.setrecursionlimit(10000)
 
 # Cria uma lista de fragmentos unicos sem acentos e caracteres especiais
-fragmentos = list(set(re.sub('[^a-zA-Z \n]+', '', open("../arquivos/fragmentos")
+fragmentos = list(set(re.sub('[^a-zA-Z \n]+', '', open("../../arquivos/fragmentos")
                              .read()).split('\n')))
 
 
 # Cria uma lista de palavras unicas sem acentos e caracteres especiais
-palavras = list(set(re.sub('[^a-zA-Z \n]+', '', open("../arquivos/muitas_palavras", encoding='utf-8')
+palavras = list(set(re.sub('[^a-zA-Z \n]+', '', open("../../arquivos/muitas_palavras", encoding='utf-8')
                            .read()).split('\n')))
 
 
@@ -53,4 +53,4 @@ if __name__ == "__main__":
     palavras_finais = reduce(lambda x, y: x + '\n' + y, verificadas)
 
     # Salva no arquivo dentro da pasta arquivos
-    open('../arquivos/saida', 'w').write(palavras_finais)
+    open('../../arquivos/saida', 'w').write(palavras_finais)
