@@ -3,17 +3,20 @@ import re
 fragmentos = re.sub('[^a-zA-Z \n]+', '', open("fragmentos").read()).split('\n')
 palavras = re.sub('[^a-zA-Z \n]+', '', open("palavras").read()).split('\n')
 
-fragmentos = [frag.lower() for frag in fragmentos]
-palavras = [palavra.lower() for palavra in palavras]
+# Cria uma lista de fragmentos unicos sem acentos e caracteres especiais
+fragmentos = list(set(re.sub('[^a-zA-Z \n]+', '', open("../arquivos/fragmentos")
+                             .read()).split('\n')))
 
 palavrasLocal = None
 fragmentosLocal = []
 
-verificadas = []
+# Cria uma lista de palavras unicas sem acentos e caracteres especiais
+palavras = list(set(re.sub('[^a-zA-Z \n]+', '', open("../arquivos/muitas_palavras", encoding='utf-8')
+                           .read()).split('\n')))
 
 
-def percorre_palavras(palavras):
-    global verificadas
+# Cria uma lista de fragmentos com todos os fragmentos minusculos
+fragmentos = [frag.lower() for frag in fragmentos]
 
     # verifica se a lista está vazia (funciona, acredite)
     if palavras:
@@ -21,23 +24,32 @@ def percorre_palavras(palavras):
         if percorre_fragmentos(palavra):
             verificadas.append(palavra)
 
-        percorre_palavras(palavras)
+# Cria uma lista de palavras com quantidade de caracteres maior que 3 e minusculas
+palavras = [palavra.lower() for palavra in palavras if len(palavra) > 3]
 
 
 def percorre_fragmentos(palavra, idx=0):
+    # Verifica se o indice (idx) eh maior ou igual ao tamanho de fragmentos
     if idx >= len(fragmentos):
         return False
 
-    fragmento = fragmentos[idx]
+    # Inicializa duas variáveis -> um, dois = valor_um, valor_dois
+    bla, fragmento = False, fragmentos[idx]
 
-    if palavra:
+    # Se a palavra estiver vazia
+    if not palavra:
         return True
 
+    # Verifica se a quantidade de caracteres de palavra eh maior que a de fragmento
     elif len(palavra) >= len(fragmento):
-        if palavra[:len(fragmento)] == fragmento:
-            return percorre_fragmentos(palavra[len(fragmento):], 0)
 
-    percorre_fragmentos(palavra, idx+1)
+        # Verifica se a palavra (do inicio ate o tamanho do fragmento) eh igual ao fragmento
+        if palavra[:len(fragmento)] == fragmento:
+            # Guarda estado da recursao. Caso a primeira descida nao tenha sido sucesso, ela volta
+            # pra onde deu certo e tenta de novo
+            bla = percorre_fragmentos(palavra[len(fragmento):], 0)
+
+    return bla or percorre_fragmentos(palavra, idx + 1)
 
 
 if __name__ == "__main__":
