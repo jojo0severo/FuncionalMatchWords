@@ -9,8 +9,6 @@ sys.setrecursionlimit(10000)
 fragmentos = list(set(re.sub('[^a-zA-Z \n]+', '', open("../arquivos/fragmentos")
                              .read()).split('\n')))
 
-palavrasLocal = None
-fragmentosLocal = []
 
 # Cria uma lista de palavras unicas sem acentos e caracteres especiais
 palavras = list(set(re.sub('[^a-zA-Z \n]+', '', open("../arquivos/muitas_palavras", encoding='utf-8')
@@ -20,11 +18,6 @@ palavras = list(set(re.sub('[^a-zA-Z \n]+', '', open("../arquivos/muitas_palavra
 # Cria uma lista de fragmentos com todos os fragmentos minusculos
 fragmentos = [frag.lower() for frag in fragmentos]
 
-    # verifica se a lista está vazia (funciona, acredite)
-    if palavras:
-        palavra = palavras.pop(0)
-        if percorre_fragmentos(palavra):
-            verificadas.append(palavra)
 
 # Cria uma lista de palavras com quantidade de caracteres maior que 3 e minusculas
 palavras = [palavra.lower() for palavra in palavras if len(palavra) > 3]
@@ -55,6 +48,11 @@ def percorre_fragmentos(palavra, idx=0):
 
 
 if __name__ == "__main__":
-    percorre_palavras(palavras)
-    for i in verificadas:
-        print(i)
+    # Percorre todas as palavras e retorna as palavras que foram aceitas pelo metodo
+    verificadas = [palavra for palavra in palavras if percorre_fragmentos(palavra)]
+
+    # Concatena todas as palvras separando por \n
+    palavras_finais = reduce(lambda x, y: x + '\n' + y, verificadas)
+
+    # Salva no arquivo dentro da pasta arquivos
+    open('../arquivos/saida', 'w').write(palavras_finais)
